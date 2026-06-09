@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Defender - Space Shooter</title>
+    <meta name="description" content="A premium neon-style space shooter game with a scoreboard.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-layer">
+            <div id="score-board">
+                <div class="score-label">SCORE</div>
+                <div id="score-value">0</div>
+            </div>
+            
+            <div id="start-screen" class="overlay active">
+                <h1>NEON DEFENDER</h1>
+                <p>Use Left/Right Arrows or A/D to Move. Space or Up Arrow to Shoot.</p>
+                <button id="start-btn" class="neon-btn">START GAME</button>
+            </div>
+
+            <div id="game-over-screen" class="overlay">
+                <h1>GAME OVER</h1>
+                <div class="final-score">Final Score: <span id="final-score-value">0</span></div>
+                <button id="restart-btn" class="neon-btn">PLAY AGAIN</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
