@@ -48,8 +48,8 @@ window.addEventListener('keyup', (e) => {
 
 class Player {
     constructor() {
-        this.width = 40;
-        this.height = 40;
+        this.width = 60;
+        this.height = 60;
         this.x = canvas.width / 2 - this.width / 2;
         this.y = canvas.height - this.height - 20;
         this.speed = 7;
@@ -58,9 +58,13 @@ class Player {
 
     draw() {
         ctx.save();
-        ctx.font = '40px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
+        // Angel Wings
+        ctx.font = '80px Arial';
+        ctx.fillText('🪽', this.x + this.width / 2, this.y + this.height / 2 - 10);
+        // Mom Avatar
+        ctx.font = '60px Arial';
         ctx.fillText('👩', this.x + this.width / 2, this.y + this.height / 2);
         ctx.restore();
     }
@@ -197,14 +201,32 @@ function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
     return x2 < x1 + w1 && x2 + w2 > x1 && y2 < y1 + h1 && y2 + h2 > y1;
 }
 
+function drawGarden() {
+    ctx.save();
+    ctx.font = '40px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    
+    // Background trees and house
+    ctx.fillText('🌳', 40, canvas.height - 10);
+    ctx.fillText('🏡', 130, canvas.height - 5);
+    ctx.fillText('🌻', 210, canvas.height - 5);
+    ctx.fillText('🪴', canvas.width - 60, canvas.height - 5);
+    ctx.fillText('🌳', canvas.width - 150, canvas.height - 10);
+    ctx.fillText('🌷', canvas.width - 230, canvas.height - 5);
+    ctx.restore();
+}
+
 function animate() {
     if (!isPlaying) return;
     
     animationId = requestAnimationFrame(animate);
     
-    // Create a trailing effect
-    ctx.fillStyle = 'rgba(10, 0, 0, 0.3)';
+    // Create a trailing effect with light background
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    drawGarden();
     
     player.update();
     spawnEnemies();
@@ -288,7 +310,7 @@ function gameOver() {
     
     // Draw particles briefly
     const deathAnim = setInterval(() => {
-        ctx.fillStyle = 'rgba(10, 0, 0, 0.3)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         for (let i = particles.length - 1; i >= 0; i--) {
@@ -312,5 +334,6 @@ startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', startGame);
 
 // Draw initial background
-ctx.fillStyle = '#0a0000';
+ctx.fillStyle = '#ffffff';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
+drawGarden();
