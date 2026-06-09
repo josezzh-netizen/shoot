@@ -58,17 +58,10 @@ class Player {
 
     draw() {
         ctx.save();
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = this.color;
-        ctx.fillStyle = this.color;
-        
-        // Draw ship shape (triangle)
-        ctx.beginPath();
-        ctx.moveTo(this.x + this.width / 2, this.y);
-        ctx.lineTo(this.x + this.width, this.y + this.height);
-        ctx.lineTo(this.x, this.y + this.height);
-        ctx.closePath();
-        ctx.fill();
+        ctx.font = '40px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('👩', this.x + this.width / 2, this.y + this.height / 2);
         ctx.restore();
     }
 
@@ -87,38 +80,20 @@ class Projectile {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 6;
-        this.height = 16;
-        this.radius = 8; // kept for collision detection
+        this.width = 24;
+        this.height = 24;
+        this.radius = 12; // kept for collision detection
         this.speed = 10;
-        this.color = '#ffaa00'; // Rocket flame color
-        this.bodyColor = '#dddddd';
+        const weapons = ['🍳', '🥣', '🥄', '🥘', '🔪'];
+        this.weapon = weapons[Math.floor(Math.random() * weapons.length)];
     }
 
     draw() {
         ctx.save();
-        // Rocket body
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = this.bodyColor;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y - this.height / 2); // Tip
-        ctx.lineTo(this.x + this.width / 2, this.y);
-        ctx.lineTo(this.x + this.width / 2, this.y + this.height / 2);
-        ctx.lineTo(this.x - this.width / 2, this.y + this.height / 2);
-        ctx.lineTo(this.x - this.width / 2, this.y);
-        ctx.closePath();
-        ctx.fill();
-
-        // Rocket exhaust/flame
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = this.color;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(this.x - this.width / 2 + 1, this.y + this.height / 2);
-        ctx.lineTo(this.x + this.width / 2 - 1, this.y + this.height / 2);
-        ctx.lineTo(this.x, this.y + this.height / 2 + 6 + Math.random() * 6); // Flickering flame
-        ctx.closePath();
-        ctx.fill();
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.weapon, this.x, this.y);
         ctx.restore();
     }
 
@@ -136,23 +111,16 @@ class Enemy {
         this.y = y;
         // Increase speed based on score
         this.speed = 2 + Math.random() * 2 + (score * 0.05);
-        this.color = '#aa0000';
+        const bugs = ['🦟', '🪰', '🪳'];
+        this.bug = bugs[Math.floor(Math.random() * bugs.length)];
     }
 
     draw() {
         ctx.save();
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = this.color;
-        ctx.fillStyle = this.color;
-        
-        // Draw enemy shape (diamond)
-        ctx.beginPath();
-        ctx.moveTo(this.x + this.width / 2, this.y);
-        ctx.lineTo(this.x + this.width, this.y + this.height / 2);
-        ctx.lineTo(this.x + this.width / 2, this.y + this.height);
-        ctx.lineTo(this.x, this.y + this.height / 2);
-        ctx.closePath();
-        ctx.fill();
+        ctx.font = '30px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.bug, this.x + this.width / 2, this.y + this.height / 2);
         ctx.restore();
     }
 
